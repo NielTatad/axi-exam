@@ -28,7 +28,7 @@ Create a Git repository which includes instructions on how to run the solution.
 - Windows PowerShell (to run `Deploy.ps1`).
 
 ## Solution (what was done)
-- Dockerfile kept as a multi‑stage build targeting .NET Core 3.1; app listens on container port 80 via `ASPNETCORE_URLS=http://+:80`.
+- Dockerfile kept as a multi‑stage build targeting .NET Core 3.1 app listens on container port 80 via `ASPNETCORE_URLS=http://+:80`.
 - Docker Compose configured to:
   - Build from repo root (`context: .`) using `Dockerfile`
   - Run the container as `super-service:local`
