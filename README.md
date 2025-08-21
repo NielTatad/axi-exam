@@ -48,12 +48,16 @@ services:
       dockerfile: Dockerfile
     image: super-service:local
     restart: always
-    expose:
-      - "80"
     ports:
-      - "8081:80"
+      - 8081:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
 ```
 
 ## Quick start (Docker Compose)
