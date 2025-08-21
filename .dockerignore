@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# IDE/editor
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+**/bin/
+**/obj/
+**/out/
+**/publish/
+
+*.nupkg
+*.snupkg
+
+test/
+
+/tmp/
+logs/
+*.log
+
+.DS_Store
+Thumbs.db
