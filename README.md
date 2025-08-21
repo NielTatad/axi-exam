@@ -43,6 +43,12 @@ Create a Git repository which includes instructions on how to run the solution.
   - Rebuilds and starts the container in detached mode (`docker-compose up -d --build`)
   - Prints running container status and access URL (`http://localhost:8081`)
 
+### Why Docker Compose?
+- **Simplicity** → Provides a single YAML file that defines how the application is built, run, and networked, avoiding manual `docker run` commands.
+- **Reproducibility** → Anyone can run the same setup with one command ensuring consistent local environments.
+- **Scalability** → Makes it easy to add more services later (databases, caching layers, reverse proxies, etc.) without changing the deployment workflow.
+- **One-click deploy** → Integrates seamlessly with `Deploy.ps1` so the whole stack can be started, stopped or rebuilt with a single command.
+
 Compose snippet now used:
 ```yaml
 services:
