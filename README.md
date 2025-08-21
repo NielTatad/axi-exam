@@ -28,16 +28,20 @@ Create a Git repository which includes instructions on how to run the solution.
 - Windows PowerShell (to run `Deploy.ps1`).
 
 ## Solution (what was done)
-- Dockerfile kept as a multi‑stage build targeting .NET Core 3.1 app listens on container port 80 via `ASPNETCORE_URLS=http://+:80`.
-- Docker Compose configured to:
+- **Dockerfile** kept as a multi-stage build targeting a .NET Core 3.1 app:
+  - Builds and publishes the app in a lightweight runtime image
+  - App listens on container port 80 (default for ASP.NET Core in Docker)
+- **Docker Compose** configured to:
   - Build from repo root (`context: .`) using `Dockerfile`
   - Run the container as `super-service:local`
-  - Map host `8081` to container `80` (so Jenkins can keep `8080`)
-  - Set `ASPNETCORE_ENVIRONMENT=Development` and always restart
-- Deploy.ps1 updated to support Compose‑only flow (no .NET SDK required):
-  - Skips `dotnet` checks and build/tests when `-UseCompose` is supplied
-  - Fixed PowerShell string interpolation and output URLs
-  - Provides actions: `up | rebuild | down | logs | status | restart`
+  - Map host port `8081` to container port `80` (avoids conflict with Jenkins on `8080`)
+  - Set `ASPNETCORE_ENVIRONMENT=Development`
+  - Restart container automatically on failure (`restart: always`)
+- **Deploy.ps1** (one-click deployment script):
+  - Verifies Docker is installed
+  - Stops and removes any existing containers (`docker-compose down --remove-orphans`)
+  - Rebuilds and starts the container in detached mode (`docker-compose up -d --build`)
+  - Prints running container status and access URL (`http://localhost:8081`)
 
 Compose snippet now used:
 ```yaml
